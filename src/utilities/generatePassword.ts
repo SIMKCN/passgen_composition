@@ -115,7 +115,7 @@ let passwordLength = <number>0
 
 function generatePassword(labels: string[], length: number) {
   setLabelArray(labels)
-  setPasswordLength(passwordLength)
+  setPasswordLength(length)
   resetPasswordVariables()
   addSelectedCharactersToPassphrase()
   shufflePassphrase()
