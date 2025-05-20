@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-
+import BaseButton from './components/BaseButton.vue';
+import BaseLabel from './components/BaseLabel.vue';
+import BaseMessage from './components/BaseMessage.vue';
+import AppPasswordStrength from './components/AppPasswordStrength.vue';
+import AppCharacterSelector from './components/AppCharacterSelector.vue';
+import AppPasswordLengthInput from './components/AppPasswordLengthInput.vue';
 const upperCaseLetters = [
   "A",
   "B",
@@ -148,7 +153,8 @@ function resetPasswordVariables() {
   changeCheckedToCopyIcon()
 }
 function addSelectedCharactersToPassphrase() {
-  const charGroup = {
+
+  const charGroup: { [key: string]: string[]} = {
     Großbuchstaben: upperCaseLetters,
     Kleinbuchstaben: lowerCaseLetters,
     Zahlen: numbers,
@@ -160,7 +166,7 @@ function addSelectedCharactersToPassphrase() {
     }
   })
 }
-function addCharsToPassphrase(value: []) {
+function addCharsToPassphrase(value: string[]) {
   passphrase.push(...value)
 
 }
