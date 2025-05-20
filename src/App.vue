@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import BaseButton from './components/BaseButton.vue';
 import BaseLabel from './components/BaseLabel.vue';
 import BaseMessage from './components/BaseMessage.vue';
@@ -150,8 +150,19 @@ function resetPasswordVariables() {
   outputInformation("", "")
   changeCheckedToCopyIcon()
 }
-function addSelectedCharactersToPassphrase() {
+function deletePassphrase() {
+  passphrase.length = 0
+}
 
+function outputInformation(text: string, kind: string) {
+  textColorMessage.value = kind
+  message.value = text
+
+}
+function changeCheckedToCopyIcon() {
+  copyIcon.value = "/copy.png"
+}
+function addSelectedCharactersToPassphrase() {
   const charGroup: { [key: string]: string[]} = {
     Großbuchstaben: upperCaseLetters,
     Kleinbuchstaben: lowerCaseLetters,
@@ -168,6 +179,7 @@ function addCharsToPassphrase(value: string[]) {
   passphrase.push(...value)
 
 }
+
 function shufflePassphrase(): string[] {
   let m = passphrase.length;
   let t: string;
@@ -195,14 +207,8 @@ function generatePasswordFromPassphrase() {
   password.value[0] = pre_password
 }
 
-function deletePassphrase() {
-  passphrase.length = 0
-}
-function outputInformation(text: string, kind: string) {
-  textColorMessage.value = kind
-  message.value = text
 
-}
+
 function outputErrorCharacters() {
   outputInformation("Es wurde keine Zeichengruppe ausgewählt!", "text-red-600")
 }
@@ -241,9 +247,7 @@ function errorNoChars() {
 function copyPasswordandOutputCopyMessage() {
   navigator.clipboard.writeText(password.value[0])
 }
-function changeCheckedToCopyIcon() {
-  copyIcon.value = "/copy.png"
-}
+
 function changeIconToWrong() {
   copyIcon.value = "/wrong.png"
 }
