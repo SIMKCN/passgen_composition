@@ -110,13 +110,22 @@ const symbols = [
 ]
 const password = <Array<string>>[]
 const passphrase: string[] = []
-const labelArray = <Array<string>>[]
-const passwordLength = <number>0
-function generatePassword() {
+let labelArray = <Array<string>>[]
+let passwordLength = <number>0
+
+function generatePassword(labels: string[], length: number) {
+  setLabelArray(labels)
+  setPasswordLength(passwordLength)
   resetPasswordVariables()
   addSelectedCharactersToPassphrase()
   shufflePassphrase()
   generatePasswordFromPassphrase()
+}
+function setLabelArray(labels: string[]) {
+  labelArray = labels
+}
+function setPasswordLength(length: number) {
+  passwordLength = length
 }
 function resetPasswordVariables() {
   deletePassphrase()
@@ -160,11 +169,11 @@ function shufflePassphrase(): string[] {
 function generatePasswordFromPassphrase() {
   let n = <number>0
   let pre_password = <string>''
-  while (n < passwordLength.value) {
+  while (n < passwordLength) {
     n++
     const randomIndex = Math.floor(Math.random() * passphrase.length)
     const item = passphrase[randomIndex]
     pre_password += item
   }
-  password.value[0] = pre_password
+  password[0] = pre_password
 }
