@@ -8,9 +8,13 @@ const ALPHABET_LENGTH = 26
 const SYMBOL_AMOUNT = 32
 const DIGITS = 10
 
-const passwordStrength = ref<string>("")
+interface Safety {
+    max: number,
+    label: string,
+    class: string
+}
 const safetyLevel = ref<number>(0)
-const safetyValues: [
+const safetyValues: Safety[] = [
         { max: 40, label: "sehr unsicher", class: "text-[#ff0000]" },
         { max: 50, label: "akzeptabel", class: "text-[#ff6300]" },
         { max: 60, label: "fast sicher", class: "text-[#ff6300]" },
@@ -75,7 +79,7 @@ function updateCharacterPoolCount() {
 </script>
 <template>
     <base-message
-      :labelMessage="safetyValues.[safetyLevel].label"
+      :labelMessage="safetyValues[safetyLevel].label"
       :class="safetyValues[safetyLevel].class"
     ></base-message>
   </template>
