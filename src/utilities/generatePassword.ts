@@ -1,0 +1,170 @@
+const upperCaseLetters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+]
+const lowerCaseLetters = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+]
+
+const numbers = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '0',
+]
+const symbols = [
+  '!',
+  '#',
+  '$',
+  '%',
+  '&',
+  "'",
+  '(',
+  ')',
+  '*',
+  '+',
+  ',',
+  '-',
+  '.',
+  '/',
+  ':',
+  ';',
+  '<',
+  '=',
+  '>',
+  '?',
+  '@',
+  '[',
+  ']',
+  '^',
+  '_',
+  '{',
+  '|',
+  '}',
+  '~',
+]
+const password = <Array<string>>[]
+const passphrase: string[] = []
+const labelArray = <Array<string>>[]
+const passwordLength = <number>0
+function generatePassword() {
+  resetPasswordVariables()
+  addSelectedCharactersToPassphrase()
+  shufflePassphrase()
+  generatePasswordFromPassphrase()
+}
+function resetPasswordVariables() {
+  deletePassphrase()
+  password.length = 0
+}
+function deletePassphrase() {
+  passphrase.length = 0
+}
+function addSelectedCharactersToPassphrase() {
+  const charGroup: { [key: string]: string[] } = {
+    Großbuchstaben: upperCaseLetters,
+    Kleinbuchstaben: lowerCaseLetters,
+    Zahlen: numbers,
+    Symbole: symbols,
+  }
+  labelArray.forEach((label) => {
+    if (charGroup[label]) {
+      addCharsToPassphrase(charGroup[label])
+    }
+  })
+}
+function addCharsToPassphrase(value: string[]) {
+  passphrase.push(...value)
+}
+
+function shufflePassphrase(): string[] {
+  let m = passphrase.length
+  let t: string
+  let i: number
+
+  while (m) {
+    i = Math.floor(Math.random() * m--)
+    t = passphrase[m]
+    passphrase[m] = passphrase[i]
+    passphrase[i] = t
+  }
+
+  return passphrase
+}
+
+function generatePasswordFromPassphrase() {
+  let n = <number>0
+  let pre_password = <string>''
+  while (n < passwordLength.value) {
+    n++
+    const randomIndex = Math.floor(Math.random() * passphrase.length)
+    const item = passphrase[randomIndex]
+    pre_password += item
+  }
+  password.value[0] = pre_password
+}

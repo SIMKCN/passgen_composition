@@ -6,6 +6,7 @@ import BaseMessage from './components/BaseMessage.vue';
 import AppPasswordStrength from './components/AppPasswordStrength.vue';
 import AppCharacterSelector from './components/AppCharacterSelector.vue';
 import AppPasswordLengthInput from './components/AppPasswordLengthInput.vue';
+
 const upperCaseLetters = [
   "A",
   "B",
