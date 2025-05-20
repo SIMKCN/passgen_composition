@@ -130,9 +130,6 @@ const textColorMessage = ref<string>("text-red-600")
 const copyIcon = ref<string>("/copy.png")
 const generateButtonStatus = ref<boolean>(true)
 
-onMounted(() => {
-  console.log(generateButtonStatus.value)
-})
 function handleInput() {
   if (generateButtonStatus.value == true) {
     generatePassword()
