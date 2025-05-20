@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import BaseButton from './components/BaseButton.vue';
 import BaseLabel from './components/BaseLabel.vue';
 import BaseMessage from './components/BaseMessage.vue';
@@ -126,23 +126,28 @@ const password = ref<Array<string>>([])
 const labelArray = ref<Array<string>>([])
 const passwordLength = ref<number>(0)
 const message = ref<string>("")
-const passwordGenerated = ref<boolean>(true)
 const textColorMessage = ref<string>("text-red-600")
 const copyIcon = ref<string>("/copy.png")
 const generateButtonStatus = ref<boolean>(true)
 
-
+onMounted(() => {
+  console.log(generateButtonStatus.value)
+})
 function handleInput() {
   if (generateButtonStatus.value == true) {
     generatePassword()
+    console.log("generatePassword")
   } else {
     outputErrorCharacters()
+    console.log("outputErrorCharacters()")
   }
 }
 
 function generatePassword() {
   resetPasswordVariables()
+  console.log("resetPasswordVariables")
   addSelectedCharactersToPassphrase()
+  console.log("addSelectedCharactersToPassphrase")
   shufflePassphrase()
   generatePasswordFromPassphrase()
 }
@@ -286,7 +291,7 @@ function changeCopyIconToChecked() {
           <BaseButton
             buttonLabel="Generiere"
             @gotClicked="handleInput"
-
+            :disabled="!generateButtonStatus"
             :class="
               generateButtonStatus ? 'cursor-pointer' : 'cursor-not-allowed'
             "

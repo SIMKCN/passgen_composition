@@ -30,7 +30,7 @@ const safetyValues: Safety[] = [
 
 interface Props{
     password: string
-    labelArray: []
+    labelArray: string[]
 }
 
 const props = defineProps<Props>()
