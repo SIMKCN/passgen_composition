@@ -20,7 +20,6 @@ const checkboxesLabels = ref<Checkboxes[]>([
 function updateCheckboxArrayAndSendToApp($event: string) {
   updateCheckboxArray($event)
   const labels_checked_boxes: string[] = createArrayOfCheckedBoxes()
-  console.log(labels_checked_boxes)
   emitLabelsOrErrorToApp(labels_checked_boxes)
 }
 
@@ -39,13 +38,10 @@ function createArrayOfCheckedBoxes() {
 }
 
 function emitLabelsOrErrorToApp(labels_checked_boxes: string[]) {
-  console.log("Sending characters")
   if (labels_checked_boxes.length != 0) {
     emit("update_label_array", labels_checked_boxes)
-    console.log("send characters")
   } else {
     emit('error_empty_label_array')
-    console.log("erro")
   }
 }
 </script>

@@ -136,18 +136,14 @@ onMounted(() => {
 function handleInput() {
   if (generateButtonStatus.value == true) {
     generatePassword()
-    console.log("generatePassword")
   } else {
     outputErrorCharacters()
-    console.log("outputErrorCharacters()")
   }
 }
 
 function generatePassword() {
   resetPasswordVariables()
-  console.log("resetPasswordVariables")
   addSelectedCharactersToPassphrase()
-  console.log("addSelectedCharactersToPassphrase")
   shufflePassphrase()
   generatePasswordFromPassphrase()
 }
