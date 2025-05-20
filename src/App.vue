@@ -118,7 +118,7 @@ const passphrase: string[] = []
 // })
 
 const password = ref<Array<string>>([])
-const labelArray = ref(Array)
+const labelArray = ref<Array<string>>([])
 const password_length = ref<number>(0)
 const message = ref<string>("")
 const passwordGenerated = ref<boolean>(true)
@@ -207,6 +207,22 @@ function changeCheckedToCopyIcon() {
 }
 function changeIconToWrong() {
   copyIcon.value = "/wrong.png"
+}
+
+function updateLabelAndEnableButton(labels: []) {
+  resetOutput()
+  setLabelArray(labels)
+  flipGenerateButtonStatus(true)
+}
+function resetOutput() {
+  outputInformation("", "")
+}
+function setLabelArray(labels: []) {
+  labelArray.value = labels
+}
+
+function flipGenerateButtonStatus(Boolean: boolean) {
+  generateButtonStatus.value = Boolean
 }
 
 </script>
