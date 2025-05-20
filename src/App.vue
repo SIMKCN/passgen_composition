@@ -113,13 +113,13 @@ const symbols = [
 ];
 const passphrase: string[] = []
 
-// const isPasswordGenerated = computed(() => {
-// return password.value.length > 0;
-// })
+const isPasswordGenerated = computed(() => {
+  return password.value.length > 0;
+})
 
 const password = ref<Array<string>>([])
 const labelArray = ref<Array<string>>([])
-const password_length = ref<number>(0)
+const passwordLength = ref<number>(0)
 const message = ref<string>("")
 const passwordGenerated = ref<boolean>(true)
 const textColorMessage = ref<string>("text-red-600")
@@ -182,7 +182,7 @@ function shufflePassphrase(): string[] {
 function generatePasswordFromPassphrase() {
   let n = <number>(0)
   let pre_password = <string>("")
-  while (n < passwordLength) {
+  while (n < passwordLength.value) {
     n++;
     const randomIndex = Math.floor(Math.random() * passphrase.length)
     const item = passphrase[randomIndex]
@@ -202,12 +202,6 @@ function outputInformation(text: string, kind: string) {
 function outputErrorCharacters() {
   outputInformation("Es wurde keine Zeichengruppe ausgewählt!", "text-red-600")
 }
-function changeCheckedToCopyIcon() {
-  copyIcon.value = "/copy.png"
-}
-function changeIconToWrong() {
-  copyIcon.value = "/wrong.png"
-}
 
 function updateLabelAndEnableButton(labels: []) {
   resetOutput()
@@ -224,5 +218,83 @@ function setLabelArray(labels: []) {
 function flipGenerateButtonStatus(Boolean: boolean) {
   generateButtonStatus.value = Boolean
 }
-
+function updatePasswordLength(value: number) {
+  passwordLength.value = value
+}
+function handlePasswordCopying() {
+  if (password.value.length != 0) {
+    copyPasswordandOutputCopyMessage()
+    changeCopyIconToChecked()
+  } else {
+    changeIconToWrong()
+  }
+}
+function errorNoChars() {
+  outputErrorCharacters()
+  flipGenerateButtonStatus(false)
+  deletePassphrase()
+}
+function copyPasswordandOutputCopyMessage() {
+  navigator.clipboard.writeText(password.value[0])
+}
+function changeCheckedToCopyIcon() {
+  copyIcon.value = "/copy.png"
+}
+function changeIconToWrong() {
+  copyIcon.value = "/wrong.png"
+}
+function changeCopyIconToChecked() {
+  copyIcon.value = "/check.png"
+}
 </script>
+<template>
+  <div class="flex items-center justify-center h-screen">
+    <div
+      class="bg-[#CAF0F8] w-80 px-4 py-2 rounded-lg animate-fade animate-once animate-duration-200 animate-ease-linear shadow-2xl"
+    >
+      <div>
+        <h1 class="text-lg ml-16">Passwortgenerator</h1>
+        <div class="grid grid-cols-2 grid-rows-1 w-72 mt-3">
+          <base-label
+            class="justify-self-start w-60 rounded-lg"
+            :labelText="password[0]"
+          ></base-label>
+          <BaseButton
+            class="h-10 w-10 justify-self-end hover:animate-pulse"
+            @gotClicked="handlePasswordCopying"
+            :icon-src="copyIcon"
+          ></BaseButton>
+        </div>
+        <base-message
+          :labelMessage="message"
+          :textColor="textColorMessage"
+        ></base-message>
+        <AppCharacterSelector
+          @update_label_array="updateLabelAndEnableButton($event)"
+          @error_empty_label_array="errorNoChars()"
+        ></AppCharacterSelector>
+        <AppPasswordLengthInput
+          @update_password_length="updatePasswordLength($event)"
+        ></AppPasswordLengthInput>
+        <div class="grid grid-cols-2 mt-3 mb-3">
+          <BaseButton
+            buttonLabel="Generiere"
+            @gotClicked="handleInput"
+
+            :class="
+              generateButtonStatus ? 'cursor-pointer' : 'cursor-not-allowed'
+            "
+            icon-src="noIcon"
+            class="h-10 animate-wiggle hover:animate-none"
+          ></BaseButton>
+          <AppPasswordStrength
+            v-if="isPasswordGenerated"
+            :password="password[0]"
+            :labelArray="labelArray"
+            class="mx-2"
+          ></AppPasswordStrength>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
