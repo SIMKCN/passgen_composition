@@ -6,7 +6,7 @@ import BaseMessage from './components/BaseMessage.vue';
 import AppPasswordStrength from './components/AppPasswordStrength.vue';
 import AppCharacterSelector from './components/AppCharacterSelector.vue';
 import AppPasswordLengthInput from './components/AppPasswordLengthInput.vue';
-
+import { generatePassword } from './utilities/generatePassword.ts'
 const upperCaseLetters = [
   "A",
   "B",
@@ -133,12 +133,12 @@ const generateButtonStatus = ref<boolean>(true)
 
 function handleInput() {
   if (generateButtonStatus.value == true) {
-    generatePassword()
+    password.value = generatePassword(labelArray.value, passwordLength.value)
   } else {
     outputErrorCharacters()
   }
 }
-
+/*
 function generatePassword() {
   resetPasswordVariables()
   addSelectedCharactersToPassphrase()
@@ -154,7 +154,7 @@ function resetPasswordVariables() {
 function deletePassphrase() {
   passphrase.length = 0
 }
-
+*/
 function outputInformation(text: string, kind: string) {
   textColorMessage.value = kind
   message.value = text
@@ -163,6 +163,7 @@ function outputInformation(text: string, kind: string) {
 function changeCheckedToCopyIcon() {
   copyIcon.value = "/copy.png"
 }
+/*
 function addSelectedCharactersToPassphrase() {
   const charGroup: { [key: string]: string[]} = {
     Großbuchstaben: upperCaseLetters,
@@ -208,7 +209,7 @@ function generatePasswordFromPassphrase() {
   password.value[0] = pre_password
 }
 
-
+*/
 
 function outputErrorCharacters() {
   outputInformation("Es wurde keine Zeichengruppe ausgewählt!", "text-red-600")

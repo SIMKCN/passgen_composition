@@ -113,13 +113,14 @@ const passphrase: string[] = []
 let labelArray = <Array<string>>[]
 let passwordLength = <number>0
 
-function generatePassword(labels: string[], length: number) {
+export function generatePassword(labels: string[], length: number) {
   setLabelArray(labels)
   setPasswordLength(length)
   resetPasswordVariables()
   addSelectedCharactersToPassphrase()
   shufflePassphrase()
   generatePasswordFromPassphrase()
+  return password
 }
 function setLabelArray(labels: string[]) {
   labelArray = labels
