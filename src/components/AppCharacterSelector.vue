@@ -17,13 +17,13 @@ const checkboxesLabels = ref<Checkboxes[]>([
 ])
 
 
-function updateCheckboxArrayAndSendToApp($event) {
+function updateCheckboxArrayAndSendToApp($event: string) {
   updateCheckboxArray($event)
   const labels_checked_boxes = createArrayOfCheckedBoxes()
   emitLabelsOrErrorToApp(labels_checked_boxes)
 }
 
-function updateCheckboxArray($event) {
+function updateCheckboxArray($event: string) {
   for (let i = 0; i < checkboxesLabels.value.length; i++) {
         if ($event == checkboxesLabels.value[i].label) {
           checkboxesLabels.value[i].checked = !checkboxesLabels.value[i].checked;
@@ -49,21 +49,21 @@ function emitLabelsOrErrorToApp(labels_checked_boxes: []) {
   <div
     class="grid grid-cols-1 mt-5 mb-5 rounded-lg w-72 bg-[#0077B6] text-[#CAF0F8] px-2 py-2"
   >
-    <BaseSwitchToggle
+    <base-switch-toggle
       label="Großbuchstaben"
       @got_checked="updateCheckboxArrayAndSendToApp($event)"
-    ></BaseSwitchToggle>
-    <BaseSwitchToggle
+    ></base-switch-toggle>
+    <base-switch-toggle
       label="Kleinbuchstaben"
       @got_checked="updateCheckboxArrayAndSendToApp($event)"
-    ></BaseSwitchToggle>
-    <BaseSwitchToggle
+    ></base-switch-toggle>
+    <base-switch-toggle
       label="Symbole"
       @got_checked="updateCheckboxArrayAndSendToApp($event)"
-    ></BaseSwitchToggle>
-    <BaseSwitchToggle
+    ></base-switch-toggle>
+    <base-switch-toggle
       label="Zahlen"
       @got_checked="updateCheckboxArrayAndSendToApp($event)"
-    ></BaseSwitchToggle>
+    ></base-switch-toggle>
   </div>
 </template>
