@@ -114,14 +114,15 @@ let labelArray = <Array<string>>[]
 let passwordLength = <number>0
 
 export function generatePassword(labels: string[], length: number) {
+  resetPasswordVariables()
   setLabelArray(labels)
   setPasswordLength(length)
-  resetPasswordVariables()
   addSelectedCharactersToPassphrase()
   shufflePassphrase()
   generatePasswordFromPassphrase()
   return password
 }
+
 function setLabelArray(labels: string[]) {
   labelArray = labels
 }

@@ -20,29 +20,18 @@ const copyIcon = ref<string>("/copy.png")
 const generateButtonStatus = ref<boolean>(true)
 
 function handleInput() {
+  resetPassword()
   if (generateButtonStatus.value == true) {
+    changeCheckedToCopyIcon()
     password.value = generatePassword(labelArray.value, passwordLength.value)
   } else {
     outputErrorCharacters()
   }
 }
-/*
-function generatePassword() {
-  resetPasswordVariables()
-  addSelectedCharactersToPassphrase()
-  shufflePassphrase()
-  generatePasswordFromPassphrase()
-}
-function resetPasswordVariables() {
-  deletePassphrase()
+function resetPassword() {
   password.value.length = 0
-  outputInformation("", "")
-  changeCheckedToCopyIcon()
 }
-function deletePassphrase() {
-  passphrase.length = 0
-}
-*/
+
 function outputInformation(text: string, kind: string) {
   textColorMessage.value = kind
   message.value = text
@@ -51,53 +40,7 @@ function outputInformation(text: string, kind: string) {
 function changeCheckedToCopyIcon() {
   copyIcon.value = "/copy.png"
 }
-/*
-function addSelectedCharactersToPassphrase() {
-  const charGroup: { [key: string]: string[]} = {
-    Großbuchstaben: upperCaseLetters,
-    Kleinbuchstaben: lowerCaseLetters,
-    Zahlen: numbers,
-    Symbole: symbols,
-  };
-  labelArray.value.forEach((label) => {
-    if (charGroup[label]) {
-      addCharsToPassphrase(charGroup[label])
-    }
-  })
-}
-function addCharsToPassphrase(value: string[]) {
-  passphrase.push(...value)
 
-}
-
-function shufflePassphrase(): string[] {
-  let m = passphrase.length;
-  let t: string;
-  let i: number;
-
-  while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = passphrase[m];
-    passphrase[m] = passphrase[i];
-    passphrase[i] = t;
-  }
-
-  return passphrase;
-}
-
-function generatePasswordFromPassphrase() {
-  let n = <number>(0)
-  let pre_password = <string>("")
-  while (n < passwordLength.value) {
-    n++;
-    const randomIndex = Math.floor(Math.random() * passphrase.length)
-    const item = passphrase[randomIndex]
-    pre_password += item
-  }
-  password.value[0] = pre_password
-}
-
-*/
 
 function outputErrorCharacters() {
   outputInformation("Es wurde keine Zeichengruppe ausgewählt!", "text-red-600")
