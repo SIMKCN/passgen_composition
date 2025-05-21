@@ -148,14 +148,16 @@ function generatePassword() {
 }
 function resetPasswordVariables() {
   deletePassphrase()
-  password.value.length = 0
+  deletePassword()
   outputInformation("", "")
   changeCheckedToCopyIcon()
 }
 function deletePassphrase() {
   passphrase.length = 0
 }
-
+function deletePassword() {
+  password.value.length = 0
+}
 function outputInformation(text: string, textColor?: string) {
   textColorMessage.value = textColor
   message.value = text
