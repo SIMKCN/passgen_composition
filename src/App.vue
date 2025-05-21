@@ -52,7 +52,7 @@ function updateLabelAndEnableButton(labels: []) {
   flipGenerateButtonStatus(true)
 }
 function resetOutput() {
-  outputInformation("")
+  outputInformation("", "")
 }
 function setLabelArray(labels: []) {
   labelArray.value = labels
