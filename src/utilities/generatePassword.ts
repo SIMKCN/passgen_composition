@@ -1,4 +1,4 @@
-const upperCaseLetters = [
+const upperCaseLetters: string[] = [
   'A',
   'B',
   'C',
@@ -26,7 +26,7 @@ const upperCaseLetters = [
   'Y',
   'Z',
 ]
-const lowerCaseLetters = [
+const lowerCaseLetters: string[] = [
   'a',
   'b',
   'c',
@@ -55,7 +55,7 @@ const lowerCaseLetters = [
   'z',
 ]
 
-const numbers = [
+const numbers: string[] = [
   '1',
   '2',
   '3',
@@ -77,7 +77,7 @@ const numbers = [
   '9',
   '0',
 ]
-const symbols = [
+const symbols: string[] = [
   '!',
   '#',
   '$',
@@ -108,7 +108,7 @@ const symbols = [
   '}',
   '~',
 ]
-const password = <Array<string>>[]
+const password: string[] = []
 const passphrase: string[] = []
 let labelArray = <Array<string>>[]
 let passwordLength = <number>0
@@ -131,10 +131,13 @@ function setPasswordLength(length: number) {
 }
 function resetPasswordVariables() {
   deletePassphrase()
-  password.length = 0
+  deletePassword()
 }
 function deletePassphrase() {
   passphrase.length = 0
+}
+function deletePassword() {
+  password.length = 0
 }
 function addSelectedCharactersToPassphrase() {
   const charGroup: { [key: string]: string[] } = {
