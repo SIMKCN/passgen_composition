@@ -31,7 +31,7 @@ function updateCheckboxArray($event: string) {
       }
 }
 
-function createArrayOfCheckedBoxes() {
+function createArrayOfCheckedBoxes(): string[]{
   const checked_boxes = checkboxesLabels.value.filter(
     (item) => item.checked === true);
       return checked_boxes.map((item) => item.label);

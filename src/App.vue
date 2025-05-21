@@ -6,7 +6,9 @@ import BaseMessage from './components/BaseMessage.vue';
 import AppPasswordStrength from './components/AppPasswordStrength.vue';
 import AppCharacterSelector from './components/AppCharacterSelector.vue';
 import AppPasswordLengthInput from './components/AppPasswordLengthInput.vue';
-const upperCaseLetters = [
+
+
+const upperCaseLetters: string[] = [
   "A",
   "B",
   "C",
@@ -34,7 +36,7 @@ const upperCaseLetters = [
   "Y",
   "Z",
 ];
-const lowerCaseLetters = [
+const lowerCaseLetters: string[] = [
   "a",
   "b",
   "c",
@@ -63,7 +65,7 @@ const lowerCaseLetters = [
   "z",
 ];
 
-const numbers = [
+const numbers: string[] = [
   "1",
   "2",
   "3",
@@ -85,7 +87,7 @@ const numbers = [
   "9",
   "0",
 ];
-const symbols = [
+const symbols: string[] = [
   "!",
   "#",
   "$",
@@ -126,7 +128,7 @@ const password = ref<Array<string>>([])
 const labelArray = ref<Array<string>>([])
 const passwordLength = ref<number>(0)
 const message = ref<string>("")
-const textColorMessage = ref<string>("text-red-600")
+const textColorMessage = ref<string>()
 const copyIcon = ref<string>("/copy.png")
 const generateButtonStatus = ref<boolean>(true)
 
@@ -154,8 +156,8 @@ function deletePassphrase() {
   passphrase.length = 0
 }
 
-function outputInformation(text: string, kind: string) {
-  textColorMessage.value = kind
+function outputInformation(text: string, textColor?: string) {
+  textColorMessage.value = textColor
   message.value = text
 
 }
@@ -219,7 +221,7 @@ function updateLabelAndEnableButton(labels: []) {
   flipGenerateButtonStatus(true)
 }
 function resetOutput() {
-  outputInformation("", "")
+  outputInformation("")
 }
 function setLabelArray(labels: []) {
   labelArray.value = labels
@@ -233,7 +235,7 @@ function updatePasswordLength(value: number) {
 }
 function handlePasswordCopying() {
   if (password.value.length != 0) {
-    copyPasswordandOutputCopyMessage()
+    copyPasswordToClipboard()
     changeCopyIconToChecked()
   } else {
     changeIconToWrong()
@@ -244,7 +246,7 @@ function errorNoChars() {
   flipGenerateButtonStatus(false)
   deletePassphrase()
 }
-function copyPasswordandOutputCopyMessage() {
+function copyPasswordToClipboard() {
   navigator.clipboard.writeText(password.value[0])
 }
 
