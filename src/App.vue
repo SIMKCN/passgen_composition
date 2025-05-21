@@ -15,7 +15,7 @@ const password = ref<Array<string>>([])
 const labelArray = ref<Array<string>>([])
 const passwordLength = ref<number>(0)
 const message = ref<string>("")
-const textColorMessage = ref<string>("text-red-600")
+const textColorMessage = ref<string>()
 const copyIcon = ref<string>("/copy.png")
 const generateButtonStatus = ref<boolean>(true)
 
@@ -52,7 +52,7 @@ function updateLabelAndEnableButton(labels: []) {
   flipGenerateButtonStatus(true)
 }
 function resetOutput() {
-  outputInformation("", "")
+  outputInformation("")
 }
 function setLabelArray(labels: []) {
   labelArray.value = labels
@@ -66,7 +66,7 @@ function updatePasswordLength(value: number) {
 }
 function handlePasswordCopying() {
   if (password.value.length != 0) {
-    copyPasswordandOutputCopyMessage()
+    copyPasswordToClipboard()
     changeCopyIconToChecked()
   } else {
     changeIconToWrong()
@@ -76,7 +76,7 @@ function errorNoChars() {
   outputErrorCharacters()
   flipGenerateButtonStatus(false)
 }
-function copyPasswordandOutputCopyMessage() {
+function copyPasswordToClipboard() {
   navigator.clipboard.writeText(password.value[0])
 }
 

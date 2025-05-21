@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 import BaseSwitchToggle from './BaseSwitchToggle.vue';
 
+const emit = defineEmits(['update_label_array', 'error_empty_label_array'])
+
 interface Checkboxes {
   label: string,
   checked: boolean
 }
-
-const emit = defineEmits(['update_label_array', 'error_empty_label_array'])
 
 const checkboxesLabels = ref<Checkboxes[]>([
         { label: "Großbuchstaben", checked: false },
@@ -31,7 +31,7 @@ function updateCheckboxArray($event: string) {
       }
 }
 
-function createArrayOfCheckedBoxes() {
+function createArrayOfCheckedBoxes(): string[]{
   const checked_boxes = checkboxesLabels.value.filter(
     (item) => item.checked === true);
       return checked_boxes.map((item) => item.label);
